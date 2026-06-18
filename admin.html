@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Davetiye Yerel Yönetim Paneli</title>
+    <style>
+        :root { --gold: #D4AF37; --dark: #1a1a1a; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f2f5; margin: 0; padding: 20px; color: #333; line-height: 1.6; }
+        .container { max-width: 900px; margin: 0 auto; background: #fff; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        header { text-align: center; border-bottom: 2px solid #eee; margin-bottom: 30px; padding-bottom: 20px; }
+        h1 { color: var(--dark); margin: 0; font-size: 24px; }
+        h2 { font-size: 18px; color: var(--gold); border-left: 4px solid var(--gold); padding-left: 10px; margin-top: 40px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 14px; color: #555; }
+        input[type="text"], input[type="datetime-local"], textarea, select {
+            width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; font-size: 15px; transition: border 0.3s;
+        }
+        input:focus { border-color: var(--gold); outline: none; box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.1); }
+        textarea { resize: vertical; min-height: 80px; }
+        .switch-container { display: flex; align-items: center; justify-content: space-between; background: #f9f9f9; padding: 12px 15px; border-radius: 8px; margin-bottom: 10px; border: 1px solid #eee; }
+        .switch { position: relative; display: inline-block; width: 44px; height: 24px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; inset: 0; background-color: #ccc; transition: .4s; border-radius: 24px; }
+        .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background-color: var(--gold); }
+        input:checked + .slider:before { transform: translateX(20px); }
+        .footer-btns { position: sticky; bottom: 0; background: #fff; padding: 20px 0; margin-top: 40px; border-top: 1px solid #eee; }
+        .btn {
+            background: var(--dark); color: #fff; padding: 16px 32px; border: none; border-radius: 8px; cursor: pointer;
+            font-size: 16px; font-weight: 600; width: 100%; transition: transform 0.2s, background 0.3s;
+        }
+        .btn:hover { background: #000; transform: translateY(-2px); }
+        .hint { font-size: 12px; color: #888; margin-top: 5px; }
+        @media (max-width: 600px) { .container { padding: 20px; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Davetiye Yönetim Paneli</h1>
+            <p style="color: #888; font-size: 14px;">Tüm değişiklikler yerel olarak kaydedilir.</p>
+        </header>
+
+        <form id="adminForm">
+            <h2>💕 Çift ve Aile Bilgileri</h2>
+            <div class="grid">
+                <div class="form-group">
+                    <label>Gelin Kısa Ad</label>
+                    <input type="text" name="gelinAdi" value="Elif">
+                </div>
+                <div class="form-group">
+                    <label>Damat Kısa Ad</label>
+                    <input type="text" name="damatAdi" value="Polat">
+                </div>
+            </div>
+            <div class="grid">
+                <div class="form-group">
+                    <label>Gelin Tam Adı</label>
+                    <input type="text" name="gelinTamAdi" value="Elif Eylül">
+                </div>
+                <div class="form-group">
+                    <label>Damat Tam Adı</label>
+                    <input type="text" name="damatTamAdi" value="Polat Alemdar">
+                </div>
+            </div>
+            <div class="grid">
+                <div class="form-group">
+                    <label>Gelin Ailesi</label>
+                    <input type="text" name="gelinAilesi" value="Ayşe Eylül'ün Kızı">
+                </div>
+                <div class="form-group">
+                    <label>Damat Ailesi</label>
+                    <input type="text" name="damatAilesi" value="Ömer & Nazife Candan'ın Oğlu">
+                </div>
+            </div>
+
+            <h2>📅 Tarih ve Genel Konum</h2>
+            <div class="grid">
+                <div class="form-group">
+                    <label>Geri Sayım Tarihi (Sayaç İçin)</label>
+                    <input type="datetime-local" name="sayacTarihi" value="2026-08-29T20:00">
+                </div>
+                <div class="form-group">
+                    <label>Ana Görsel Tarih Metni</label>
+                    <input type="text" name="anaTarihMetni" value="CUMARTESİ, 29 . 08 . 2026">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Şehir ve Ülke</label>
+                <input type="text" name="genelKonum" value="İSTANBUL, TÜRKİYE">
+            </div>
+
+            <h2>💍 Merasim Detayları</h2>
+            <div style="background: #fff9e6; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <label style="color: #b08d1a; font-size: 13px; margin-bottom: 10px; display: block;">KINA DETAYLARI</label>
+                <div class="grid">
+                    <input type="text" name="kinaTarihi" value="28 Ağustos 2026" placeholder="Tarih">
+                    <input type="text" name="kinaSaati" value="19:00" placeholder="Saat">
+                    <input type="text" name="kinaGunu" value="CUMA" placeholder="Gün">
+                </div>
+                <div class="form-group" style="margin-top: 15px;">
+                    <input type="text" name="kinaMekani" value="DURAN EMMİ'NİN KIRAATHANESİ" placeholder="Mekan Adı">
+                </div>
+                <input type="text" name="kinaAdresi" value="Salacak Mah. Üsküdar/İstanbul" placeholder="Adres">
+                <input type="text" name="kinaHarita" value="https://goo.gl/maps/duran-emmi-ornek-link" placeholder="Google Maps Linki" style="margin-top: 10px;">
+            </div>
+
+            <div style="background: #f0f7ff; padding: 15px; border-radius: 8px;">
+                <label style="color: #2b5a9e; font-size: 13px; margin-bottom: 10px; display: block;">DÜĞÜN DETAYLARI</label>
+                <div class="grid">
+                    <input type="text" name="dugunTarihi" value="29 Ağustos 2026" placeholder="Tarih">
+                    <input type="text" name="dugunSaati" value="20:00" placeholder="Saat">
+                    <input type="text" name="dugunGunu" value="CUMARTESİ" placeholder="Gün">
+                </div>
+                <div class="form-group" style="margin-top: 15px;">
+                    <input type="text" name="dugunMekani" value="KIZ KULESİ" placeholder="Mekan Adı">
+                </div>
+                <input type="text" name="dugunAdresi" value="Salacak Mevkii, Üsküdar/İstanbul" placeholder="Adres">
+                <input type="text" name="dugunHarita" value="https://goo.gl/maps/kiz-kulesi-ornek-link" placeholder="Google Maps Linki" style="margin-top: 10px;">
+            </div>
+
+            <h2>✍️ Sözler ve Müzik</h2>
+            <div class="form-group">
+                <label>Ana Davetiye Sözü (Giriş)</label>
+                <textarea name="anaSoz">"Ölüm ölüm dediğin nedir ki gülüm, ben senin için yaşamayı göze almışım."</textarea>
+            </div>
+            <div class="form-group">
+                <label>Alıntı Söz (Örn: Ömer Baba Bölümü)</label>
+                <textarea name="diniSoz">"Ey oğul! Aşk nasip işidir, hesap işi değil... Kader gayrete aşıktır derler, biz gayret ettik nasibimizi bulduk."</textarea>
+            </div>
+            <div class="form-group">
+                <label>Söz Sahibi</label>
+                <input type="text" name="diniSozSahibi" value="- Ömer Baba">
+            </div>
+            <div class="form-group">
+                <label>Arka Plan Müziği</label>
+                <input type="text" name="muzikYolu" value="public/music/elif.mp3">
+                <p class="hint">Klasör içindeki müzik dosyasının yolu.</p>
+            </div>
+
+            <h2>⚙️ Bölüm Görünürlüğü</h2>
+            <div class="switch-container">
+                <span>Açılış Ekranını Göster</span>
+                <label class="switch">
+                    <input type="checkbox" name="showOpening" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <div class="switch-container">
+                <span>Kına Bölümünü Göster</span>
+                <label class="switch">
+                    <input type="checkbox" name="showKina" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <div class="switch-container">
+                <span>Alıntı/Dini Söz Bölümünü Göster</span>
+                <label class="switch">
+                    <input type="checkbox" name="showOmerBaba" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <div class="switch-container">
+                <span>Katılım Durumu (RSVP) Bölümünü Göster</span>
+                <label class="switch">
+                    <input type="checkbox" name="showRSVP" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <h2>📸 Galeri / Hatıralarımız Yönetimi</h2>
+            <div class="form-group" style="background: #fdfdfd; padding: 20px; border: 1px dashed #ccc; border-radius: 8px;">
+                <label>Fotoğrafları Seç</label>
+                <input type="file" id="galeri-sec" multiple accept="image/*" style="padding: 10px 0;">
+                <p class="hint">Birden fazla fotoğraf seçebilirsiniz. Seçilen fotoğrafları aşağıda görebilirsiniz.</p>
+                
+                <div id="secilen-fotolar" style="margin-top: 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px;">
+                    <!-- Seçilen fotoğraflar burada listelenecek -->
+                </div>
+            </div>
+
+            <div class="footer-btns">
+                <button type="button" class="btn" onclick="generateSettings()">Değişiklikleri Kaydet ve Ayar Dosyasını İndir</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        let galeriDizisi = [];
+
+        document.getElementById('galeri-sec').addEventListener('change', function(e) {
+            const files = e.target.files;
+            for (let i = 0; i < files.length; i++) {
+                if (!galeriDizisi.includes(files[i].name)) {
+                    galeriDizisi.push(files[i].name);
+                }
+            }
+            listeleFotograflar();
+        });
+
+        function listeleFotograflar() {
+            const container = document.getElementById('secilen-fotolar');
+            container.innerHTML = '';
+            galeriDizisi.forEach((file, index) => {
+                const item = document.createElement('div');
+                item.style.cssText = 'position:relative; background:#eee; padding:10px; border-radius:5px; font-size:10px; word-break:break-all; text-align:center;';
+                item.innerHTML = `
+                    <div style="margin-bottom:5px; font-weight:bold; color:var(--dark);">${file}</div>
+                    <button type="button" onclick="fotoSil(${index})" style="background:#ff4d4d; color:white; border:none; border-radius:3px; padding:2px 5px; cursor:pointer;">Sil</button>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        function fotoSil(index) {
+            galeriDizisi.splice(index, 1);
+            listeleFotograflar();
+        }
+
+        function generateSettings() {
+            const form = document.getElementById('adminForm');
+            const data = {};
+            const elements = form.elements;
+
+            for (let i = 0; i < elements.length; i++) {
+                const el = elements[i];
+                if (el.name) {
+                    if (el.type === 'checkbox') {
+                        data[el.name] = el.checked;
+                    } else {
+                        data[el.name] = el.value;
+                    }
+                }
+            }
+
+            // Galeri fotoğraflarını ekle
+            data.galeriFotograflari = galeriDizisi;
+
+            const content = "window.davetiyeAyarlari = " + JSON.stringify(data, null, 4) + ";";
+            const blob = new Blob([content], { type: 'text/javascript' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'ayarlar.js';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            alert('ayarlar.js dosyası başarıyla oluşturuldu!\n\nSeçtiğiniz fotoğrafları davetiyenizin "public/images/" klasörüne attığınızdan emin olun.');
+        }
+    </script>
+</body>
+</html>
